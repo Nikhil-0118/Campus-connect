@@ -1,0 +1,25 @@
+# ──────────────────────────────────────────────
+# CampusConnect — Python Dependencies
+# ──────────────────────────────────────────────
+
+# Core
+Django>=5.2,<5.3
+djangorestframework>=3.15,<4
+
+# Authentication
+djangorestframework-simplejwt>=5.4,<6
+
+# CORS
+django-cors-headers>=4.6,<5
+
+# Database
+psycopg[binary]>=3.2,<4
+
+# Image processing (required by ImageField)
+Pillow>=11.2,<12
+
+# Environment
+python-dotenv>=1.1,<2
+
+# Production server (Linux / macOS only)
+gunicorn>=23,<24
