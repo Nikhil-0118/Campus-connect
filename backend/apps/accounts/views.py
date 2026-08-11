@@ -5,10 +5,10 @@ API views for the accounts app.
 """
 
 from rest_framework import generics, status
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
-from .serializers import UserRegistrationSerializer
+from .serializers import UserRegistrationSerializer, UserSerializer
 
 
 class RegisterAPIView(generics.CreateAPIView):
@@ -37,3 +37,19 @@ class RegisterAPIView(generics.CreateAPIView):
             },
             status=status.HTTP_201_CREATED,
         )
+
+
+class MeAPIView(generics.RetrieveAPIView):
+    """
+    GET /api/accounts/me/
+
+    Returns the authenticated user's own data.
+    Requires JWT authentication.
+    """
+
+    serializer_class = UserSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_object(self):
+        return self.request.user
+

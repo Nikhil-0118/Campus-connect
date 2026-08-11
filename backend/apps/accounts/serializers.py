@@ -7,7 +7,63 @@ Serializers for the accounts app.
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
+from .models import Department, Branch
+
 User = get_user_model()
+
+
+# ──────────────────────────────────────────────────────
+# Nested read-only serializers for FK display
+# ──────────────────────────────────────────────────────
+
+class DepartmentMiniSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Department
+        fields = ("id", "name", "short_name")
+
+
+class BranchMiniSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Branch
+        fields = ("id", "name", "short_name")
+
+
+# ──────────────────────────────────────────────────────
+# User Serializer (read-only, for /me/ and references)
+# ──────────────────────────────────────────────────────
+
+class UserSerializer(serializers.ModelSerializer):
+    """
+    Read-only serializer for authenticated user data.
+    Never exposes password or sensitive auth fields.
+    """
+
+    department_detail = DepartmentMiniSerializer(source="department", read_only=True)
+    branch_detail = BranchMiniSerializer(source="branch", read_only=True)
+
+    class Meta:
+        model = User
+        fields = (
+            "id",
+            "username",
+            "email",
+            "first_name",
+            "last_name",
+            "profile_picture",
+            "bio",
+            "department",
+            "department_detail",
+            "branch",
+            "branch_detail",
+            "year",
+            "section",
+            "student_id",
+            "phone_number",
+            "is_verified_student",
+            "is_profile_completed",
+            "date_joined",
+        )
+        read_only_fields = fields
 
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
