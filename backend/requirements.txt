@@ -17,6 +17,7 @@ django-filter>=24.0
 
 # Database
 psycopg[binary]>=3.2,<4
+dj-database-url>=2.3,<3
 
 # Image processing (required by ImageField)
 Pillow>=11.2,<12
@@ -24,5 +25,9 @@ Pillow>=11.2,<12
 # Environment
 python-dotenv>=1.1,<2
 
+# Static files (production)
+whitenoise>=6.8,<7
+
 # Production server (Linux / macOS only)
 gunicorn>=23,<24
+
