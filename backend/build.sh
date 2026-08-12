@@ -11,3 +11,6 @@ python manage.py collectstatic --no-input
 
 # Run database migrations
 python manage.py migrate
+
+# Initialize production superuser & default department/branch data
+python manage.py initialize_production
