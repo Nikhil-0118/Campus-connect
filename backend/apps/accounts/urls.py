@@ -21,4 +21,6 @@ urlpatterns = [
     path("login/", TokenObtainPairView.as_view(), name="login"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token-refresh"),
     path("me/", views.MeAPIView.as_view(), name="me"),
+    path("departments/", views.DepartmentListView.as_view(), name="department-list"),
+    path("branches/", views.BranchListView.as_view(), name="branch-list"),
 ]
